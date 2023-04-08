@@ -18,7 +18,7 @@ def main():
 
     for line in subreddits:
         line = line.rstrip('\n')
-        for post in reddit.subreddit(line).new(limit=None):
+        for post in reddit.subreddit(line).new(limit=100):
             if post.title not in headlines:
                 fposts = open("posts/" + line + ".txt", "a")
                 fposts.write(post.title + '\n')
@@ -26,9 +26,9 @@ def main():
 
                 fcomments = open("comments/" + line + ".txt", "a")
 
-                post.comments.replace_more(limit=None)
+                post.comments.replace_more(limit=100, threshold=10)
                 for comment in post.comments.list():
-                    if comment.body != "":
+                    if comment.body != "" and comment.body != "[deleted]":
                         preprocess = comment.body.replace("\n", " ")
                         fcomments.write(preprocess + "\n")
                 
