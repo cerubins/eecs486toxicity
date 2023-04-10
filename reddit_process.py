@@ -368,7 +368,7 @@ if __name__ == "__main__":
     # make emoticon dictionary
     # emoticons[<emoticon>] = "positive" | "negative" | "neutral"
     emoticons = {}
-    with open('data/emoticons.csv', newline='', encoding='iso-8859-1') as f:
+    with open('process_files/emoticons.csv', newline='', encoding='iso-8859-1') as f:
         csvread = csv.reader(f, delimiter=',')
         for row in csvread:
             value = ""
@@ -382,35 +382,35 @@ if __name__ == "__main__":
     
     # make intensifer list
     intensifiers = []
-    with open('data/intensifiers.csv', encoding='utf-8') as f:
+    with open('process_files/intensifiers.csv', encoding='utf-8') as f:
         csvread = csv.reader(f, delimiter=',')
         for row in csvread:
             intensifiers.append(row[0])
     
     # make diminisher list
     diminishers = []
-    with open('data/diminishers.csv', encoding='utf-8') as f:
+    with open('process_files/diminishers.csv', encoding='utf-8') as f:
         csvread = csv.reader(f, delimiter=',')
         for row in csvread:
             diminishers.append(row[0])
 
     # make negator list
     negators = []
-    with open('data/negators.csv', encoding='utf-8') as f:
+    with open('process_files/negators.csv', encoding='utf-8') as f:
         csvread = csv.reader(f, delimiter=',')
         for row in csvread:
             negators.append(row[0])
 
     # make contractions list
     contractions = {}
-    with open('data/contractions.csv', encoding='utf-8') as f:
+    with open('process_files/contractions.csv', encoding='utf-8') as f:
         csvread = csv.reader(f, delimiter=',')
         for row in csvread:
             contractions[row[0]] = row[1]
 
     # make slang list
     slang = {}
-    with open('data/slang.tsv', encoding='utf-8') as f:
+    with open('process_files/slang.tsv', encoding='utf-8') as f:
         csvread = csv.reader(f, delimiter='\t')
         for row in csvread:
             slang[row[0]] = row[1]
