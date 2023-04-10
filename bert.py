@@ -11,7 +11,6 @@ from tqdm.notebook import tqdm
 from tensorflow.compat.v1 import ConfigProto
 from tensorflow.compat.v1 import InteractiveSession
 
-
 def fix_gpu():
     config = ConfigProto()
     config.gpu_options.allow_growth = True
@@ -24,23 +23,10 @@ def wiki_tsv_to_dataframe():
     df = pd.read_csv('data/processed_train.tsv', sep='\t')
     df = df[['comment_text', 'binary']]
     df.columns = ['TEXT', 'TOXIC']
-    df1 = df.iloc[:79785]
-    df2 = df.iloc[79785:]
+    df1 = df.iloc[:1600]
+    df2 = df.iloc[1600:3200]
 
     return df1, df2
-
-# total = 0
-
-# for file in glob.glob('comments/*'):
-#     with open(file) as f:
-#         lines = f.readlines()
-#         total += len(lines)
-#         # for line in lines:
-#         #     # preprocessing here
-#         #     bert_input = tokenizer(line, padding='max_length', max_length = 10, truncation=True, return_tensors="pt")
-#         #     #print(tokenizer.tokenize(line))
-
-# print(total)
 
 model = TFBertForSequenceClassification.from_pretrained("bert-base-uncased")
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
@@ -135,7 +121,7 @@ for file in glob.glob('comments/*'):
     with open(file) as f:
         lines = f.readlines()
 
-        filename = file.lstrip('comments/')
+        filename = file.removeprefix('comments/')
 
         print(filename)
         
@@ -161,7 +147,7 @@ for file in glob.glob('comments/*'):
         # Prints predictions into output file
         f = open('output/' + filename, 'w')
         for i in range(len(lines)):
-            f.write(lines[i], " ", labels[label[i]], "\n")
+            f.write(str(lines[i]) + str(labels[label[i]]) + "\n")
 
 
 
